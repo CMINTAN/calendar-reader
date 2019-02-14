@@ -15,7 +15,7 @@ An calenderReader class is also created to access to the calender item
     ```
 
 # To try this sample
--
+
 - Install modules in your bot folder
     ```bash
     npm install
@@ -34,7 +34,7 @@ An calenderReader class is also created to access to the calender item
 - Launch Bot Framework Emulator
 - File -> Open Bot Configuration
 - Navigate to your main bot folder
-- Select `calender-reader.bot` file
+- Select `calendeReader.bot` file
 
 # Bot state
 A key to good bot design is to track the context of a conversation, so that your bot remembers things like the answers to previous questions. Depending on what your bot is used for, you may even need to keep track of conversation state or store user related information for longer than the lifetime of one given conversation.
