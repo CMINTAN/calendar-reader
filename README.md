@@ -80,6 +80,15 @@ As you make changes to your bot running locally, and want to deploy those change
 ### Getting Additional Help Deploying to Azure
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure][40] for a complete list of deployment instructions.
 
+#### Future development
+1. Create accesor to a exisiting calendar
+2. Restructure the dialog, especially the reading loop
+3. Distinguish the date by update it to today after comparing with current date
+4. Time zone sensitive
+5. Test with Cortana
+6. Add LUIS 
+7. Include update calendar entries accessor 
+
 # Further reading
 - [Bot Framework Documentation][20]
 - [Bot Basics][32]
