@@ -1,7 +1,7 @@
 {
-    "name": "transcript-logger-bot",
+    "name": "calander-reader-bot",
     "version": "1.0.0",
-    "description": "Bot Builder v4 transcript logging middleware emulator compatible transcripts sample",
+    "description": "Bot Builder v4 based upon transcript logging middleware emulator compatible transcripts sample",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",

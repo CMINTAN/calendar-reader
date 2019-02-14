@@ -1,5 +1,5 @@
 {
-    "name": "transcriptloggerBot",
+    "name": "calenderReaderBot",
     "services": [
         {
             "type": "endpoint",

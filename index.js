@@ -26,14 +26,7 @@ const DEV_ENVIRONMENT = 'development';
 // bot name as defined in .bot file
 // See https://aka.ms/about-bot-file to learn more about .bot file its use and bot configuration.
 const BOT_CONFIGURATION = (process.env.NODE_ENV || DEV_ENVIRONMENT);
-const logDir = process.env.transcriptsPath;
-try {
-    if (!fs.existsSync(logDir)) {
-        fs.mkdirSync(logDir);
-    }
-} catch (err) {
-    console.log("Unable to create directory to store log files. \n\nPlease make sure your .env file has been set up properly and includes config for 'transcriptsPath'");
-}
+
 // Create HTTP server
 let server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function() {
@@ -44,7 +37,7 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
 
 // .bot file path
 const BOT_FILE = path.join(__dirname, (process.env.botFilePath || ''));
-
+console.log(`${ BOT_FILE }`);
 // Read bot configuration from .bot file.
 let botConfig;
 try {
