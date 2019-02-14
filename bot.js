@@ -2,20 +2,13 @@
 // Licensed under the MIT License.
 
 const { ActivityTypes } = require('botbuilder');
-const { ChoicePrompt, DialogSet, NumberPrompt, TextPrompt, WaterfallDialog } = require('botbuilder-dialogs');
+const { ChoicePrompt, DialogSet, WaterfallDialog } = require('botbuilder-dialogs');
 
 // import Calendar reader.
 const { CalendarReader } = require('./calendarReader');
 
 const DIALOG_STATE_PROPERTY = 'dialogState';
 const USER_PROFILE_PROPERTY = 'user';
-
-const WHO_ARE_YOU = 'who_are_you';
-const HELLO_USER = 'hello_user';
-
-const NAME_PROMPT = 'name_prompt';
-const CONFIRM_PROMPT = 'confirm_prompt';
-const AGE_PROMPT = 'age_prompt';
 
 // Const for Calendar access
 const MAY_I_HELP = 'may_I_help';
