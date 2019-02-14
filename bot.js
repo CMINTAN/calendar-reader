@@ -45,22 +45,6 @@ class LoggerBot {
 
         this.dialogs = new DialogSet(this.dialogState);
 
-        // Add prompts that will be used by the main dialogs.
-        this.dialogs.add(new TextPrompt(NAME_PROMPT));
-        this.dialogs.add(new ChoicePrompt(CONFIRM_PROMPT));
-        this.dialogs.add(new NumberPrompt(AGE_PROMPT, async (prompt) => {
-            if (prompt.recognized.succeeded) {
-                if (prompt.recognized.value <= 0) {
-                    await prompt.context.sendActivity(`Your age can't be less than or equal to zero.`);
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            return false;
-        }));
-
         // Add prompts to request for user's input.
         this.dialogs.add(new ChoicePrompt(START_PROMPT));
         this.dialogs.add(new ChoicePrompt(NEXT_PROMPT));
@@ -78,19 +62,6 @@ class LoggerBot {
         this.dialogs.add(new WaterfallDialog(LOOP_CALENDER, [
             this.readCalenderItem.bind(this),
             this.nextPromptLoop.bind(this)
-        ]));
-
-        // Create a dialog that asks the user for their name.
-        this.dialogs.add(new WaterfallDialog(WHO_ARE_YOU, [
-            this.promptForName.bind(this),
-            this.confirmAgePrompt.bind(this),
-            this.promptForAge.bind(this),
-            this.captureAge.bind(this)
-        ]));
-
-        // Create a dialog that displays a user name after it has been collected.
-        this.dialogs.add(new WaterfallDialog(HELLO_USER, [
-            this.displayProfile.bind(this)
         ]));
     }
 
@@ -211,57 +182,6 @@ class LoggerBot {
         }
     }
 
-    // This step in the dialog prompts the user for their name.
-    async promptForName(step) {
-        return await step.prompt(NAME_PROMPT, `What is your name, human?`);
-    }
-
-    // This step captures the user's name, then prompts whether or not to collect an age.
-    async confirmAgePrompt(step) {
-        const user = await this.userProfile.get(step.context, {});
-        user.name = step.result;
-        await this.userProfile.set(step.context, user);
-        await step.prompt(CONFIRM_PROMPT, 'Do you want to give your age?', ['yes', 'no']);
-    }
-
-    // This step checks the user's response - if yes, the bot will proceed to prompt for age.
-    // Otherwise, the bot will skip the age step.
-    async promptForAge(step) {
-        if (step.result && step.result.value === 'yes') {
-            return await step.prompt(AGE_PROMPT, {
-                prompt: `What is your age?`,
-                retryPrompt: 'Sorry, please specify your age as a positive number or say cancel.'
-            }
-            );
-        } else {
-            return await step.next(-1);
-        }
-    }
-
-    // This step captures the user's age.
-    async captureAge(step) {
-        const user = await this.userProfile.get(step.context, {});
-        if (step.result !== -1) {
-            user.age = step.result;
-            await this.userProfile.set(step.context, user);
-            await step.context.sendActivity(`I will remember that you are ${ step.result } years old.`);
-        } else {
-            await step.context.sendActivity(`No age given.`);
-        }
-        return await step.endDialog();
-    }
-
-    // This step displays the captured information back to the user.
-    async displayProfile(step) {
-        const user = await this.userProfile.get(step.context, {});
-        if (user.age) {
-            await step.context.sendActivity({ value: 'endOfInput', text: `Your name is ${ user.name } and you are ${ user.age } years old.` });
-        } else {
-            await step.context.sendActivity({ value: 'endOfInput', text: `Your name is ${ user.name } and you did not share your age.` });
-        }
-        return await step.endDialog();
-    }
-
     /**
      *
      * @param {TurnContext} turnContext A TurnContext object that will be interpreted and acted upon by the bot.
@@ -289,17 +209,6 @@ class LoggerBot {
             if (!turnContext.responded) {
                 // const user = await this.userProfile.get(dc.context, {});
                 await dc.beginDialog(MAY_I_HELP);
-                /* if (user.name) {
-                    await dc.beginDialog(HELLO_USER);
-                } else {
-                    await dc.beginDialog(WHO_ARE_YOU);
-                } */
-                /* if (user.startReading === 2) {
-                    // If there are more than one item in the calender, loop it
-                    await dc.beginDialog(LOOP_CALENDER);
-                } else {
-                    await dc.beginDialog(MAY_I_HELP);
-                } */
             }
         } else if (
             turnContext.activity.type === ActivityTypes.ConversationUpdate
@@ -315,10 +224,7 @@ class LoggerBot {
                     if (turnContext.activity.membersAdded[idx].id !== turnContext.activity.recipient.id) {
                         // Send a "this is what the bot does" message.
                         const description = [
-                            'I am a bot that demonstrates custom logging.',
-                            'We will have a short conversation where I ask a few questions ',
-                            'to collect your name and age, then store those values in UserState for later use.',
-                            'after this you will be able to find a log of the conversation in the folder set by the transcriptsPath environment variable',
+                            'I am a bot that show how to read from a calender\n',
                             'Say anything to continue.'
                         ];
                         await turnContext.sendActivity(description.join(' '));
