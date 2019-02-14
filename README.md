@@ -1,11 +1,11 @@
-# calender reader 
+# calendar reader 
 This bot is based on : Bot Framework v4 transcript logger bot sample
 
-This bot has been created using [Microsoft Bot Framework][1], it read calender data to user
-Current version the calender is simulated using a txt file in the same folder -- myCalender.txt
-myCalender.txt is in JSON format, with a "total entry" to keep track of number of items in this file
+This bot has been created using [Microsoft Bot Framework][1], it read calendar data to user
+Current version the calendar is simulated using a txt file in the same folder -- myCalendar.txt
+myCalendar.txt is in JSON format, with a "total entry" to keep track of number of items in this file
 
-An calenderReader class is also created to access to the calender item
+An calenderReader class is also created to access to the calendar item
 
 ## Prerequisites
 - [Node.js][4] version 8.5 or higher
@@ -34,7 +34,7 @@ An calenderReader class is also created to access to the calender item
 - Launch Bot Framework Emulator
 - File -> Open Bot Configuration
 - Navigate to your main bot folder
-- Select `calendeReader.bot` file
+- Select `calendareader.bot` file
 
 # Bot state
 A key to good bot design is to track the context of a conversation, so that your bot remembers things like the answers to previous questions. Depending on what your bot is used for, you may even need to keep track of conversation state or store user related information for longer than the lifetime of one given conversation.

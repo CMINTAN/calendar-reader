@@ -1,5 +1,5 @@
 {
-    "name": "calenderReaderBot",
+    "name": "calendarReaderBot",
     "services": [
         {
             "type": "endpoint",

@@ -1,5 +1,5 @@
 {
-    "name": "calander-reader-bot",
+    "name": "calendar-reader-bot",
     "version": "1.0.0",
     "description": "Bot Builder v4 based upon transcript logging middleware emulator compatible transcripts sample",
     "author": "Microsoft",
