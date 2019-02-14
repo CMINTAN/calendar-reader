@@ -1,4 +1,4 @@
-# calander reader 
+# calender reader 
 This bot is based on : Bot Framework v4 transcript logger bot sample
 
 This bot has been created using [Microsoft Bot Framework][1], it read calander data to user
