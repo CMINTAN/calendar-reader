@@ -1,6 +1,5 @@
 
 const fs = require('fs');
-const util = require('util');
 
 const fileName = 'myCalender.txt';
 /**

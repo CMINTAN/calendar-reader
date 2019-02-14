@@ -20,7 +20,6 @@ const AGE_PROMPT = 'age_prompt';
 // Const for Calender access
 const MAY_I_HELP = 'may_I_help';
 const LOOP_CALENDER = 'loop_calender';
-const UPDATE_COMPLETED = 'update_completed';
 const START_PROMPT = 'start_prompt';
 const NEXT_PROMPT = 'next_prompt';
 const UPDATE_PROMPT = 'update_prompt';

@@ -7,8 +7,7 @@ const fs = require('fs');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter, MemoryStorage, UserState, ConversationState, TranscriptLoggerMiddleware } = require('botbuilder');
-const { CustomLogger } = require('./CustomLogger');
+const { BotFrameworkAdapter, MemoryStorage, UserState, ConversationState } = require('botbuilder');
 // Import required bot configuration.
 const { BotConfiguration } = require('botframework-config');
 
@@ -19,8 +18,6 @@ const { LoggerBot } = require('./bot');
 // Note: Ensure you have a .env file and include botFilePath and botFileSecret.
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
-
-const logger = new TranscriptLoggerMiddleware(new CustomLogger());
 
 // bot endpoint name as defined in .bot file
 // See https://aka.ms/about-bot-file to learn more about .bot file its use and bot configuration .
@@ -93,8 +90,6 @@ const userState = new UserState(memoryStorage);
 
 // Create the main dialog.
 const loggerBot = new LoggerBot(conversationState, userState);
-
-adapter.use(logger);
 
 // Catch-all for errors.
 adapter.onTurnError = async (context, error) => {
